@@ -1,0 +1,31 @@
+textarea {
+	width: 100%;
+}
+
+input[type=submit] {
+	margin-top: 10px;
+}
+
+.navbar {
+	background-color:#842cdc;
+}
+#my_div{
+	border: 5px solid #842cdc;
+}
+
+#div_home{
+	background-color: black;
+}
+
+footer{
+  position: absolute;
+  color: #8a8c8f;
+	bottom: 0;
+}
+
+#font{
+	font-family: 'Nanum Pen Script', cursive;
+	
+	
+	
+}

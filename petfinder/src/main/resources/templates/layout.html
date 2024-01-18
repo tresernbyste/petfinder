@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-tofit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/bootstrap.min.css}">
+<!-- CSS -->
+<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<title>Petfinder</title>
+
+
+</head>
+<body class="container" id="font">
+	<nav class="navbar navbar-expand-lg  navbar-light border-bottom ">
+
+		<div class="container-fluid">
+			<a class="navbar-brand" href="/" style="font-size: 30px; font-weight:200; color: aqua;">PetFinder</a>
+			<button class="navbar-toggler" type="button"
+				data-bs-toggle="collapse" databs-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse text-right"
+				
+				id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0" style="font-size: 20px; font-weight:200; color: aqua;">
+					<li class="nav-item">
+					<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/signup}">회원가입</a>
+					<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/signup}">마이페이지</a>
+					</li>	
+					<li class="nav-item">
+					<a class="nav-link" sec:authorize="isAnonymous()" th:href="@{/user/login}">로그인</a> 
+					<a class="nav-link" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+					<li>
+					<a class="nav-link" th:href="@{/user/login}">공지사항</a>
+					</li>
+					<li>
+					<a class="nav-link" th:href="@{/find/list}">아이찾기</a>
+					</li>
+					<li>
+					<a class="nav-link" th:href="@{/find/list}">아이알리기</a>
+					</li>
+					<li>
+					<a class="nav-link" th:href="@{/user/login}">병원 찾기</a>
+					</li>
+						
+					</li>	
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<hr style="color: blue;">
+
+	<div class="row">
+		<div class="col-sm-2">
+
+			<div class="list-group justify-content-start">
+
+				<button type="button" class="btn btn-outline-primary" >HOME</button>
+				<button type="button" class="btn btn-outline-primary">공지사항</button>
+				<button type="button" class="btn btn-outline-primary">아이찾기</button>
+				<button type="button" class="btn btn-outline-primary">아이알리기</button>
+				<button type="button" class="btn btn-outline-primary">병원 찾기</button>
+
+			</div>
+
+		</div>
+
+		<div class="col-sm-8 mt-1 rounded ">
+		
+			<!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 Start -->
+			<th:block layout:fragment="content"></th:block>
+			<!-- 기 본 템 플 릿 안 에 삽 입 될 내 용 End -->
+		</div>
+		<div class="col-sm-2 rounded bg-light">
+			<span> <img alt="momo" src="/img/BB.jpg" class="rounded" style="width: 180px; height: 200px;"> 
+				<img alt="DD" src="/img/DD.jpg" class="rounded" style="width: 180px; height: 200px;"> 
+				<img alt="MDB" src="/img/MDB.jpg" class="rounded" style="width: 180px; height: 200px;">
+			</span>
+		</div>
+
+
+		<!-- 자 바 스 크 립 트 Start -->
+		<th:block layout:fragment="script"></th:block>
+		<!-- 자 바 스 크 립 트 End -->
+		<footer class="container ">
+
+			
+				
+				<span> 저자 : 황선우</span><br /> <span> 이메일 : byste@naver.com</span> <br />
+				<span> Copyright 2024. sunwoo . All Right Reserved.</span> <br /> <a
+					href="https://github.com/tresernbyste/petfinder.git">github</a>
+		
+		</footer>
+</body>
+</html>

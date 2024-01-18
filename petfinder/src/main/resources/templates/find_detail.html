@@ -1,0 +1,105 @@
+<html layout:decorate="~{layout}">
+<div layout:fragment="content" class="container my-3">
+	<!-- 질 문 -->
+	<h2 class="border-bottom py-2" th:text="${find.subject}"></h2>
+	<div class="card my-3">
+		<div class="card-body">
+			<div class="card-text" style="white-space: pre-line;"
+				th:text="${find.content}"></div>
+			<div class="d-flex justify-content-end">
+				<div class="badge bg-light text-dark p-2 text-start">
+
+					<div>
+						<div class="my-1">
+							<a th:href="@{|/find/modify/${find.id}|}"
+								class="btn btn-sm btn-outline-secondary"
+								sec:authorize="isAuthenticated()"
+								th:if="${find.author != null and #authentication.getPrincipal().getUsername() == find.author.username}"
+								th:text="수정"></a> <a href="javascript:void(0);"
+								th:data-uri="@{|/find/delete/${find.id}|}"
+								class="delete btn btn-sm btn-outline-secondary"
+								sec:authorize="isAuthenticated()"
+								th:if="${find.author != null and #authentication.getPrincipal().getUsername() == find.author.username}"
+								th:text="삭제"></a>
+
+						</div>
+						<span th:if="${find.author != null}"
+							th:text="${find.author.username}"></span>
+					</div>
+					<div
+						th:text="${#temporals.format(find.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 답 변 의 갯 수 표 시 -->
+	<h5 class="border-bottom my-3 py-2"
+		th:text="|${#lists.size(find.answerList)}개 의 답 변 이 있 습 니 다.|"></h5>
+	<!-- 답 변 반 복 시 작 -->
+	<div class="card my-3" th:each="answer : ${find.answerList}">
+		<div class="card-body">
+			<div class="card-text" style="white-space: pre-line;"
+				th:text="${answer.content}"></div>
+			<div class="d-flex justify-content-end">
+				<div class="badge bg-light text-dark p-2 text-start">
+					<div>
+						<div class="my-1 ">
+							<a th:href="@{|/answer/modify/${answer.id}|}"
+								class="btn btn-sm btn-outline-secondary"
+								sec:authorize="isAuthenticated()"
+								th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+								th:text="수정"></a> 
+								<a href="javascript:void(0);"
+								th:data-uri="@{|/answer/delete/${answer.id}|}"
+								class="delete btn btn-sm btn-outline-secondary"
+								sec:authorize="isAuthenticated()"
+								th:if="${answer.author != null and #authentication.getPrincipal().getUsername() == answer.author.username}"
+								th:text="삭제"></a>
+						</div>
+
+						<span th:if="${answer.author != null}"
+							th:text="${answer.author.username}"></span>
+
+					</div>
+					<div
+						th:text="${#temporals.format(answer.createDate, 'yyyy-MM-dd HH:mm')}"></div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- 답 변 반 복 끝 -->
+<!-- 답 변 작 성 -->
+<form th:action="@{|/answer/create/${find.id}|}"
+	th:object="${answerForm}" method="post" class="my-3">
+	<div th:replace="~{form_errors :: formErrorsFragment}"></div>
+
+	<textarea sec:authorize="isAnonymous()" disabled th:field="*{content}"
+		rows="2" class="form-control"></textarea>
+	<textarea sec:authorize="isAuthenticated()" th:field="*{content}"
+		rows="2" class="form-control"></textarea>
+	<input sec:authorize="isAnonymous()" type="submit" value="로그인 후 이용해주세요"
+		class="btn btn-danger my-2"> <input
+		sec:authorize="isAuthenticated()" type="submit" value="답 변 등 록"
+		class="btn btn-primary my-2">
+
+
+</form>
+</div>
+
+
+
+<script layout:fragment="script" type='text/javascript'>
+	const delete_elements = document.getElementsByClassName("delete");
+	Array.from(delete_elements).forEach(function(element) {
+		element.addEventListener('click', function() {
+			if (confirm("정 말 로 삭 제 하 시 겠 습 니 까?")) {
+				location.href = this.dataset.uri;
+			}
+			;
+		});
+	});
+</script>
+</html>
